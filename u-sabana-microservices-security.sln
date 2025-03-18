@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MS.Security.Net9.SecurityAPI", "MS.Security.Net9.SecurityAPI\MS.Security.Net9.SecurityAPI.csproj", "{EF0B807C-55AB-7C8A-236B-AEB2BF136579}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF0B807C-55AB-7C8A-236B-AEB2BF136579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF0B807C-55AB-7C8A-236B-AEB2BF136579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF0B807C-55AB-7C8A-236B-AEB2BF136579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF0B807C-55AB-7C8A-236B-AEB2BF136579}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BAA64FD8-2CEA-41D8-9608-2C7FD0C27BE1}
+	EndGlobalSection
+EndGlobal
