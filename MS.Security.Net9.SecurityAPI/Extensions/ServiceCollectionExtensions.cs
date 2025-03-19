@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MS.Security.Net9.SecurityAPI.AppConfig;
-using MS.Security.Net9.SecurityAPI.Infrastructure;
 
 public static class ServiceCollectionExtensions
 {
@@ -17,10 +16,8 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection UseAuthentication(this IServiceCollection services, Settings appSettings, ISecretProvider secretProvider)
+    public static IServiceCollection UseAuthentication(this IServiceCollection services, Settings appSettings)
     {
-        string? secret = secretProvider.GetSecret("app-secret") ?? throw new ArgumentNullException("app secret");
-
         services.AddAuthentication
         (
             config =>
@@ -41,7 +38,7 @@ public static class ServiceCollectionExtensions
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = appSettings.Token.Issuer,
                     ValidAudience = appSettings.Token.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings.Token.Secret))
                 };
             }
         );

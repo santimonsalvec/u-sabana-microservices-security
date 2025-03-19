@@ -5,12 +5,11 @@ using System.Text.Json.Serialization;
 public record AuthResponse
 {
     [JsonConstructor]
-    public AuthResponse(string accessToken, string tokenType, int expiresIn, string idToken)
+    public AuthResponse(string accessToken, string tokenType, int expiresIn)
     {
         AccessToken = accessToken;
         TokenType = tokenType;
         ExpiresIn = expiresIn;
-        IdToken = idToken;
     }
 
     [JsonPropertyName("accessToken")]
@@ -21,7 +20,4 @@ public record AuthResponse
 
     [JsonPropertyName("expiresIn")]
     public int ExpiresIn { get; private set; }
-
-    [JsonPropertyName("idToken")]
-    public string IdToken { get; private set; }
 }

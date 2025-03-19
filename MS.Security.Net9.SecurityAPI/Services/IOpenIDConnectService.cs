@@ -4,5 +4,5 @@ using MS.Security.Net9.SecurityAPI.DTOs;
 
 public interface IOpenIDConnectService
 {
-    UserInfoResponse GetUserInfo(string token);
+    Task<UserInfoResponse> GetUserInfo(string oAuthToken);
 }

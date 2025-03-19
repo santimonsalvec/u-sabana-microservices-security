@@ -1,12 +1,8 @@
 namespace MS.Security.Net9.SecurityAPI;
 
 using MS.Security.Net9.SecurityAPI.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using MS.Security.Net9.SecurityAPI.AppConfig;
 using MS.Security.Net9.SecurityAPI.Extensions;
-using MS.Security.Net9.SecurityAPI.Infrastructure;
 
 public static class Program
 {
@@ -24,14 +20,19 @@ public static class Program
         Settings appSettings = configuration.Get<Settings>()
             ?? throw new InvalidOperationException("AppSettings section not found");
 
-        ISecretProvider secretProvider = new InfisicalSecretProvider(appSettings); 
-
         // Add services to the container.
-        builder.Services.UseAuthentication(appSettings, secretProvider);
+        builder.Services.UseAuthentication(appSettings);
+        builder.Services.AddHttpClient<GoogleOpenIDConnectService>
+        (
+            client =>
+            {
+                client.BaseAddress = new Uri(appSettings.Token.BaseUrl);
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            }
+        );
         builder.Services.AddSingleton(appSettings);
-        builder.Services.AddSingleton(secretProvider);
         builder.Services.AddTransient<IOAuthService, OAuthService>();
-        builder.Services.AddTransient<IOpenIDConnectService, OpenIDConnectService>();
+        builder.Services.AddTransient<IOpenIDConnectService, GoogleOpenIDConnectService>();
         builder.Services.AddControllers();
         builder.Services.AddOpenApi();
 
