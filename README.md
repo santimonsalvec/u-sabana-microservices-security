@@ -16,5 +16,5 @@ Está encargado de la seguridad, identidad y acceso a los demas microservicios, 
 se encuentra desarrollado en Net 9.\
 ### Microservice MS.Security.React.Front
 **Descripción**
-El el portal de acceso del cliente en el cual puede acceder a través de un login a l información generada por otros microservicios y protegida a través de tokens JWT.\
+El portal de acceso del cliente en el cual puede acceder a través de un login a la información generada por otros microservicios y protegida a través de tokens JWT.\
 Se encuentra desarrollador en react con typescript y vincula herramientas como vite, tailwind y liberias UI.\
