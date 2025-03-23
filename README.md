@@ -12,7 +12,7 @@
 
 ### Microservice MS.Security.Net9.SecurityAPI
 **Descripción**
-Está encargado de la seguridad, identidad y acceso a los demas microservicios, dentro de sus funciones se encuentra generar token validando la autenticación generada a través de Google con el servicio OAuth2, también se encarta de obtener la identidad del usuario a través del mismo sistema y de validar los tokens enviados desde el cliente para permitir o denegar el acceso a otros microservicios.\
+Está encargado de la seguridad, identidad y acceso a los demas microservicios, dentro de sus funciones se encuentra generar token validando la autenticación generada a través de Google con el servicio OAuth2, también se encarga de obtener la identidad del usuario a través del mismo sistema y de validar los tokens enviados desde el cliente para permitir o denegar el acceso a otros microservicios.\
 se encuentra desarrollado en Net 9.\
 ### Microservice MS.Security.React.Front
 **Descripción**
