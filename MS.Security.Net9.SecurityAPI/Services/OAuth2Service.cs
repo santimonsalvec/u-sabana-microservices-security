@@ -11,6 +11,7 @@ public class OAuthService(Settings settings, IOpenIDConnectService openIDConnect
 {   
     private readonly IOpenIDConnectService openIDConnectService = openIDConnectService;
     private const string tokenType = "Bearer";
+    private const string emailClaimName = "email";
     private const int tokenTTLInSeconds = 3600;
     private readonly Settings settings = settings;
 
@@ -32,7 +33,7 @@ public class OAuthService(Settings settings, IOpenIDConnectService openIDConnect
             audience: this.settings.Token.Audience,
             claims: 
             [
-                new Claim(ClaimTypes.Email, email)
+                new Claim(emailClaimName, email)
             ],
             expires: DateTime.UtcNow.AddSeconds(tokenTTLInSeconds),
             signingCredentials: creds

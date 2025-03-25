@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "command": "npm run dev",
-            "name": "Run MS Security Front",
-            "request": "launch",
+            "name": "MS Security Front",
             "type": "node-terminal",
+            "command": "npm run dev",
+            "request": "launch",
             "cwd": "${workspaceFolder}/MS.Security.React.Front"
         }
     ]
