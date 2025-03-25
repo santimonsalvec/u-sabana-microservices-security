@@ -1,0 +1,11 @@
+services:
+  security-api:
+    ports:
+      - "5073:5073"
+
+  react-front:
+    volumes:
+      - ./MS.Security.React.Front:/app
+      - /app/node_modules
+    environment:
+      - VITE_SECURITY_API_URL=http://localhost:5073
