@@ -4,20 +4,27 @@ services:
       context: .
       dockerfile: "MS.Security.Net9.SecurityAPI/Dockerfile"
     image: ms-security-api:1.0.0
-    ports:
-      - "5073:5001"
+    environment:
+      - ASPNETCORE_URLS=http://+:5073
+    expose:
+      - "5073"
     networks:
-      - ms-security-network
+      - internal
     container_name: security-api
 
   react-front:
     build: 
       context: .
       dockerfile: MS.Security.React.Front/Dockerfile
+    image: ms-security-front:1.0.0
     ports:
-      - "3000:3000"
+      - "5173:5173"
+    networks:
+      - internal
+    depends_on:
+      - security-api
     container_name: react-front
-  
-  networks:
-    ms-security-network:
-      driver: bridge
+
+networks:
+  internal:
+    driver: bridge

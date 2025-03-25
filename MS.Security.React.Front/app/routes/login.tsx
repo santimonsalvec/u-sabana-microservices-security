@@ -1,12 +1,12 @@
 import { GalleryVerticalEnd } from "lucide-react"
 import { LoginForm } from "@/components/login-form";
 import { useEffect } from "react";
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import type { Route } from "../+types/root";
 import { isTokenValid } from "~/auth";
 import { useNavigate } from "react-router";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "MS.Security Login" },
     { name: "description", content: "Bienvenido al login de MS.Security!" },
@@ -14,9 +14,14 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function LoginPage() {
+  const securityApiUrl = import.meta.env.VITE_SECURITY_API_URL ||
+    (window.location.hostname === 'localhost'
+      ? 'http://localhost:5073'
+      : 'http://security-api:5073');
+
   const navigate = useNavigate();
 
-  const getTokenPromise = (token: string) => fetch('http://localhost:5073/api/security/auth/token', {
+  const getTokenPromise = (token: string) => fetch(`${securityApiUrl}/api/security/auth/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -39,7 +44,7 @@ export default function LoginPage() {
     const params = new URLSearchParams(hash.replace(/^#/, ''));
     const accessToken = params.get('access_token');
 
-    if(accessToken == null){
+    if (accessToken == null) {
       if (isTokenValid()) {
         navigate('/', { replace: true });
         return;
@@ -55,7 +60,7 @@ export default function LoginPage() {
     };
 
     if (accessToken && accessToken.trim() !== '') {
-      runPromise(accessToken).then( res => {
+      runPromise(accessToken).then(res => {
         navigate('/');
       });
     } else {
