@@ -1,0 +1,23 @@
+services:
+  security-api:
+    build:
+      context: .
+      dockerfile: "MS.Security.Net9.SecurityAPI/Dockerfile"
+    image: ms-security-api:1.0.0
+    ports:
+      - "5073:5001"
+    networks:
+      - ms-security-network
+    container_name: security-api
+
+  react-front:
+    build: 
+      context: .
+      dockerfile: MS.Security.React.Front/Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: react-front
+  
+  networks:
+    ms-security-network:
+      driver: bridge

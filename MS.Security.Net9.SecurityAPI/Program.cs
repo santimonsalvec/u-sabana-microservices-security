@@ -33,6 +33,17 @@ public static class Program
         builder.Services.AddSingleton(appSettings);
         builder.Services.AddTransient<IOAuthService, OAuthService>();
         builder.Services.AddTransient<IOpenIDConnectService, GoogleOpenIDConnectService>();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", policy =>
+            {
+                policy.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
+
         builder.Services.AddControllers();
         builder.Services.AddOpenApi();
 
@@ -44,7 +55,8 @@ public static class Program
         }
 
         app.UseHttpsRedirection();
-        app.UseAuthentication(); // Add this line
+        app.UseCors("AllowAll");
+        app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
 
