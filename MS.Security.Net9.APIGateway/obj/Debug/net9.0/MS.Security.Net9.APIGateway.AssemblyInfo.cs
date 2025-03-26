@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MS.Security.Net9.APIGateway")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3bb14a206be521a6ecd467b0fee56cc0223dbfe1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3133eed693c70a57462b3321905876c0ba07a190")]
 [assembly: System.Reflection.AssemblyProductAttribute("MS.Security.Net9.APIGateway")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MS.Security.Net9.APIGateway")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
