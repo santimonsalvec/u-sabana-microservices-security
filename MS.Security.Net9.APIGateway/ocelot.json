@@ -1,32 +1,57 @@
 {
-    "Routes": [
-      {
-        "DownstreamPathTemplate": "/api/weather-forecast",
-        "DownstreamScheme": "http",
-        "DownstreamHostAndPorts": [
-          {
-            "Host": "localhost",
-            "Port": 5194
-          }
-        ],
-        "UpstreamPathTemplate": "/api/weather-forecast",
-        "UpstreamHttpMethod": [ "GET" ]
-      },
-      {
-        "DownstreamPathTemplate": "/api/currency-market",
-        "DownstreamScheme": "http",
-        "DownstreamHostAndPorts": [
-          {
-            "Host": "localhost",
-            "Port": 5054
-          }
-        ],
-        "UpstreamPathTemplate": "/api/currency-market",
-        "UpstreamHttpMethod": [ "GET" ]
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/security/auth/token",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5073
+        }
+      ],
+      "UpstreamPathTemplate": "/api/security/auth/token",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/weather-forecast",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5194
+        }
+      ],
+      "UpstreamPathTemplate": "/api/weather-forecast",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
       }
-      
-    ],
-    "GlobalConfiguration": {
-        "BaseUrl": "https://localhost:5000"
+    },
+    {
+      "DownstreamPathTemplate": "/api/currency-market",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5054
+        }
+      ],
+      "UpstreamPathTemplate": "/api/currency-market",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5000"
   }
+}

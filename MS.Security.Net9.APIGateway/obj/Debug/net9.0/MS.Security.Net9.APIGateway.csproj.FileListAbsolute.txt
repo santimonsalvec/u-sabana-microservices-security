@@ -42,3 +42,11 @@
 /Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/obj/Debug/net9.0/MS.Security.Net9.APIGateway.genruntimeconfig.cache
 /Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/obj/Debug/net9.0/ref/MS.Security.Net9.APIGateway.dll
 /Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/bin/Debug/net9.0/ocelot.json
+/Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
+/Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
+/Users/dd/Documents/Diplomado arquitectura/u-sabana-microservices-security/MS.Security.Net9.APIGateway/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll
