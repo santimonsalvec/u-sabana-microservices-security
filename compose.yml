@@ -6,11 +6,48 @@ services:
     image: ms-security-api:1.0.0
     environment:
       - ASPNETCORE_URLS=http://+:5073
-    expose:
-      - "5073"
     networks:
       - internal
     container_name: security-api
+
+  currency-market-api:
+    build:
+      context: .
+      dockerfile: "MS.Security.Net9.CurrencyMarketAPI/Dockerfile"
+    image: ms-currency-market-api:1.0.0
+    environment:
+      - ASPNETCORE_URLS=http://+:5054
+    networks:
+      - internal
+    container_name: currency-market-api
+
+  weather-forecast-api:
+    build:
+      context: .
+      dockerfile: "MS.Security.Net9.WeatherForecastAPI/Dockerfile"
+    image: ms-weather-forecast-api:1.0.0
+    environment:
+      - ASPNETCORE_URLS=http://+:5194
+    networks:
+      - internal
+    container_name: weather-forecast-api
+
+  gateway-api:
+    build:
+      context: .
+      dockerfile: "MS.Security.Net9.APIGateway/Dockerfile"
+    image: ms-gateway-api:1.0.0
+    environment:
+      - ASPNETCORE_URLS=http://localhost:5270
+    ports:
+      - "5270:5270"
+    networks:
+      - internal
+    container_name: gateway-api
+    depends_on:
+      - weather-forecast-api
+      - currency-market-api
+      - security-api
 
   react-front:
     build: 
@@ -22,7 +59,7 @@ services:
     networks:
       - internal
     depends_on:
-      - security-api
+      - gateway-api
     container_name: react-front
 
 networks:

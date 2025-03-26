@@ -14,14 +14,11 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function LoginPage() {
-  const securityApiUrl = import.meta.env.VITE_SECURITY_API_URL ||
-    (window.location.hostname === 'localhost'
-      ? 'http://localhost:5073'
-      : 'http://security-api:5073');
+  const apiGatewayUrl = import.meta.env.VITE_API_GATEWAY_URL;
 
   const navigate = useNavigate();
 
-  const getTokenPromise = (token: string) => fetch(`${securityApiUrl}/api/security/auth/token`, {
+  const getTokenPromise = (token: string) => fetch(`${apiGatewayUrl}/api/security/auth/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -14,60 +14,103 @@ import {
     ChartTooltipContent,
 } from "@/components/ui/chart"
 
-import { testData } from "./temperature-test-data";
+import { useEffect, useState } from "react";
 
-type WeatherRawData = {
-    hourly: {
-        time: string[];
-        temperature_2m: number[];
-    };
-};
-
-type WeatherFormatted = {
-    date: string;
-    temperature: number;
-};
-
-function formatToDateTimeString(isoString: string): string {
-    const date = new Date(isoString);
-
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // meses 0-11
-    const day = date.getDate().toString().padStart(2, '0');
-
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-
-    return `${year}-${month}-${day} ${hours}:${minutes}`;
+interface IData {
+    latitude: number
+    longitude: number
+    generationtime_ms: number
+    utc_offset_seconds: number
+    timezone: string
+    timezone_abbreviation: string
+    elevation: number
+    hourly_units: HourlyUnits
+    hourly: Hourly
 }
 
-function transformHourlyWeather(data: WeatherRawData): WeatherFormatted[] {
-    const { time, temperature_2m } = data.hourly;
-    const result: WeatherFormatted[] = [];
-
-    for (let i = 0; i < time.length; i++) {
-        result.push({
-            date: time[i],
-            temperature: temperature_2m[i],
-        });
-    }
-
-    return result;
+interface HourlyUnits {
+    time: string
+    temperature_2m: string
 }
 
-const chartData = transformHourlyWeather(testData);
-
-const chartConfig = {
-    views: {
-        label: "Temp. en °C",
-    },
-    temperature: {
-        label: "°C",
-        color: "hsl(var(--chart-2))",
-    },
-} satisfies ChartConfig
+interface Hourly {
+    time: string[]
+    temperature_2m: number[]
+}
 
 const TemperatureChar = () => {
+    const [data, setData] = useState({} as IData);
+
+    type WeatherRawData = {
+        hourly: {
+            time: string[];
+            temperature_2m: number[];
+        };
+    };
+
+    type WeatherFormatted = {
+        date: string;
+        temperature: number;
+    };
+
+    function formatToDateTimeString(isoString: string): string {
+        const date = new Date(isoString);
+
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // meses 0-11
+        const day = date.getDate().toString().padStart(2, '0');
+
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }
+
+    function transformHourlyWeather(data: WeatherRawData): WeatherFormatted[] {
+        const { time, temperature_2m } = data.hourly;
+        const result: WeatherFormatted[] = [];
+
+        for (let i = 0; i < time.length; i++) {
+            result.push({
+                date: time[i],
+                temperature: temperature_2m[i],
+            });
+        }
+
+        return result;
+    }
+
+    const chartData = transformHourlyWeather(data);
+
+    const chartConfig = {
+        views: {
+            label: "Temp. en °C",
+        },
+        temperature: {
+            label: "°C",
+            color: "hsl(var(--chart-2))",
+        },
+    } satisfies ChartConfig
+
+    const apiGatewayUrl = import.meta.env.VITE_API_GATEWAY_URL;
+
+    useEffect(() => {
+        fetch(`${apiGatewayUrl}/api/weather-forecast`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem("token")}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(_data => {
+                setData(_data);
+            })
+            .catch(err => {
+                console.error('Error:', err);
+            });
+    }, [])
+
     const [activeChart, setActiveChart] =
         React.useState<keyof typeof chartConfig>("temperature")
     const refTemperature = React.useMemo(

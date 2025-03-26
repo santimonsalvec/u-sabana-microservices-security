@@ -22,7 +22,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { testData } from "./currency-test-data";
+import { useEffect, useState } from "react"
 
 const formatToDateString = (timestamp: number) => {
     const date = new Date(timestamp);
@@ -33,33 +33,60 @@ const formatToDateString = (timestamp: number) => {
     return `${year}-${month}-${day}`;
 }
 
-const chartData = testData.prices.map(([timestamp, price], index) => {
-    const marketCap = testData.market_caps[index]?.[1] ?? 0;
-    const totalVolume = testData.total_volumes[index]?.[1] ?? 0;
-
-    return {
-        date: formatToDateString(timestamp),
-        marketCap: marketCap,
-        totalVolume: totalVolume,
-    };
-});
-
-const chartConfig = {
-    price: {
-        label: "Price: ",
-        color: "hsl(var(--chart-1))",
-    },
-    marketCap: {
-        label: "Capitalización",
-        color: "hsl(var(--chart-2))",
-    },
-    totalVolume: {
-        label: "Volumen",
-        color: "hsl(var(--chart-2))",
-    },
-} satisfies ChartConfig
+interface IData {
+    prices: number[][],
+    market_caps: number[][],
+    total_volumes: number[][],
+}
 
 const CurrencyChart = () => {
+    const [data, setData] = useState({} as IData);
+
+    const chartData = data.prices.map(([timestamp, price], index) => {
+        const marketCap = data.market_caps[index]?.[1] ?? 0;
+        const totalVolume = data.total_volumes[index]?.[1] ?? 0;
+    
+        return {
+            date: formatToDateString(timestamp),
+            marketCap: marketCap,
+            totalVolume: totalVolume,
+        };
+    });
+    
+    const chartConfig = {
+        price: {
+            label: "Price: ",
+            color: "hsl(var(--chart-1))",
+        },
+        marketCap: {
+            label: "Capitalización",
+            color: "hsl(var(--chart-2))",
+        },
+        totalVolume: {
+            label: "Volumen",
+            color: "hsl(var(--chart-2))",
+        },
+    } satisfies ChartConfig
+
+    const apiGatewayUrl = import.meta.env.VITE_API_GATEWAY_URL
+
+    useEffect(() => {
+        fetch(`${apiGatewayUrl}/api/currency-market`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem("token")}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(_data => {
+                setData(_data);
+            })
+            .catch(err => {
+                console.error('Error:', err);
+            });
+    }, [])
+
     const [timeRange, setTimeRange] = React.useState("90d")
     const filteredData = chartData.filter((item) => {
         const date = new Date(item.date)
