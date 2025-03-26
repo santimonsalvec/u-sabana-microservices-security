@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "1yq8Tc4+RvvlGrvZwOn5oYXLU7r4mXkEB5x10KdYBb4=",
+  "Source": "MS.Security.Net9.WeatherForecastAPI",
+  "BasePath": "_content/MS.Security.Net9.WeatherForecastAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
