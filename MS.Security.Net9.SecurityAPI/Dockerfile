@@ -1,7 +1,12 @@
-FROM mcr.microsoft.com/dotnet/sdk:9.0
-WORKDIR /app/
-COPY /MS.Security.Net9.SecurityAPI/. /app/
-RUN dotnet restore MS.Security.Net9.SecurityAPI.csproj && dotnet build MS.Security.Net9.SecurityAPI.csproj
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+COPY /MS.Security.Net9.SecurityAPI/. ./
+RUN dotnet restore MS.Security.Net9.SecurityAPI.csproj
+RUN dotnet build MS.Security.Net9.SecurityAPI.csproj
+
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
+WORKDIR /src
+COPY --from=build /src/bin/Debug/net9.0/ .
 EXPOSE 5073
-CMD ["dotnet", "run", "MS.Security.Net9.SecurityAPI.csproj"]
-ENTRYPOINT ["dotnet", "./bin/Debug/net9.0/MS.Security.Net9.SecurityAPI.dll"]
+ENV ASPNETCORE_URLS=http://+:5073
+ENTRYPOINT ["dotnet", "MS.Security.Net9.SecurityAPI.dll"]
