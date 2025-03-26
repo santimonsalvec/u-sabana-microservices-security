@@ -1,6 +1,6 @@
-namespace MS.Security.Net9.WeatherForecastAPI;
+namespace MS.Security.Net9.CurrencyMarketAPI;
 
-using MS.Security.Net9.WeatherForecastAPI.Services;
+using MS.Security.Net9.CurrencyMarketAPI.Services;
 
 public class Program
 {
@@ -8,16 +8,16 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddHttpClient<WeatherForecastClient>
+        builder.Services.AddHttpClient<CurrencyMarketClient>
         (
             client =>
             {
-                client.BaseAddress = new Uri("https://api.open-meteo.com/v1/forecast?latitude=4.61&longitude=-74.08&hourly=temperature_2m");
+                client.BaseAddress = new Uri("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=90");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             }
         );
 
-        builder.Services.AddScoped<IWeatherForecastClient, WeatherForecastClient>();
+        builder.Services.AddScoped<ICurrencyMarketClient, CurrencyMarketClient>();
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();

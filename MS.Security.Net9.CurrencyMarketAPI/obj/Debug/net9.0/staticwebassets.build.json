@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "PKkegdyMBIWY2a9tTeXBN4bhaJQ+Xc3Y4weCGTEPI28=",
+  "Source": "MS.Security.Net9.CurrencyMarketAPI",
+  "BasePath": "_content/MS.Security.Net9.CurrencyMarketAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

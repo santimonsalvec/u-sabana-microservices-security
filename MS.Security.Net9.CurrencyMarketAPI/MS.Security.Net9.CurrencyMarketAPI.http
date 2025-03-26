@@ -1,0 +1,6 @@
+@MS.Security.Net9.CurrencyMarketAPI_HostAddress = http://localhost:5054
+
+GET {{MS.Security.Net9.CurrencyMarketAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
