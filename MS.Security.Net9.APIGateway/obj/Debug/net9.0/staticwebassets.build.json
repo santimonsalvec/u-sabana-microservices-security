@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "r+oxM/PBCHRZ0NqgUcKWzgCiP0fU5kSykLEVcJY1zKE=",
+  "Source": "MS.Security.Net9.APIGateway",
+  "BasePath": "_content/MS.Security.Net9.APIGateway",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
