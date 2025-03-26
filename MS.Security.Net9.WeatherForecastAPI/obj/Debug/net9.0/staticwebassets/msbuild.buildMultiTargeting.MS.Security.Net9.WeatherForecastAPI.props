@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/MS.Security.Net9.WeatherForecastAPI.props" />
+</Project>

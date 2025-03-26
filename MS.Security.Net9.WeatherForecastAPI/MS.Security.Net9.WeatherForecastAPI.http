@@ -1,0 +1,6 @@
+@MS.Security.Net9.WeatherForecastAPI_HostAddress = http://localhost:5194
+
+GET {{MS.Security.Net9.WeatherForecastAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
