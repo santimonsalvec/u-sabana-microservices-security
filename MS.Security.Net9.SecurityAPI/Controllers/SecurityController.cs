@@ -1,7 +1,6 @@
 namespace MS.Security.Net9.SecurityAPI.Controllers;
 
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MS.Security.Net9.SecurityAPI.DTOs;
 using MS.Security.Net9.SecurityAPI.Services;
