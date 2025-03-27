@@ -21,5 +21,8 @@ export default defineConfig(({ mode }) => {
       host: true,
       port: 5173,
     },
+    watch: {
+      usePolling: true
+    }
   };
 });

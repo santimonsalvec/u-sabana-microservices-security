@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MS.Security.Net9.WeatherForecastAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c3d02491cd2099cdfe6791c7ad1d5b3e98919a7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef9d174596dbf496bbe16a5a42cb86fda16d4218")]
 [assembly: System.Reflection.AssemblyProductAttribute("MS.Security.Net9.WeatherForecastAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MS.Security.Net9.WeatherForecastAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
