@@ -9,5 +9,4 @@ WORKDIR /src
 COPY --from=build /src/out .
 EXPOSE 5073
 ENV ASPNETCORE_URLS=http://+:5073
-RUN ls -l
 ENTRYPOINT ["dotnet", "MS.Security.Net9.SecurityAPI.dll"]

@@ -43,7 +43,6 @@ services:
       - "5270:5270"
     networks:
       - internal
-      - public
     container_name: gateway-api
 
   react-front:
@@ -53,8 +52,6 @@ services:
     image: ms-security-front:dev
     ports:
       - "5173:5173"
-    networks:
-      - public
     depends_on:
       - gateway-api
       - weather-forecast-api
@@ -64,6 +61,4 @@ services:
 
 networks:
   internal:
-    driver: bridge
-  public:
     driver: bridge
