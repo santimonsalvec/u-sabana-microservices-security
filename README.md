@@ -31,3 +31,12 @@ Microservicio que sirve como punto de entrada de los requerimientos o consultas 
 Como adicional se encarta de proteger las rutas validando la existencia y validez del JWT para lo casos en cuales aplique
 ### Diagrama de comunicación de modulos
 ![image](https://github.com/user-attachments/assets/4c5da010-41d4-4d8e-9606-dd0b22b72804)
+
+### Instrucciones para crear las imágenes y levantar los contenedores
+- requisitos previos: tener instalado [docker desktop](https://www.docker.com/products/docker-desktop/)
+- Paso 1: reconstruir imágenes, corra el siguiente comando en su terminal `docker compose build --no-cache`
+- Paso 2: ejecutar aplicaciones docker en los contenedores, corra el sigiente comando en su terminal `docker compose up`
+- Paso 3: abra el cliente web visitando la siguiente url `http://localhost:5173`
+  - Nota: si recibe el siguiente error, espere 3 segundos y recargue la página
+    <img width="1247" alt="error-front" src="https://github.com/user-attachments/assets/8372b084-de24-42d4-b032-2a8c794b404a" />
+
