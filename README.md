@@ -18,3 +18,4 @@ se encuentra desarrollado en Net 9.\
 **Descripción**
 El portal de acceso del cliente en el cual puede acceder a través de un login a la información generada por otros microservicios y protegida a través de tokens JWT.\
 Se encuentra desarrollador en react con typescript y vincula herramientas como vite, tailwind y liberias UI.\
+
