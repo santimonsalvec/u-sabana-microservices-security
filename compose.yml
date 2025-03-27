@@ -1,9 +1,9 @@
 services:
   security-api:
     build:
-      context: .
-      dockerfile: "MS.Security.Net9.SecurityAPI/Dockerfile"
-    image: ms-security-api:1.0.0
+      context: ./MS.Security.Net9.SecurityAPI
+      dockerfile: ./Dockerfile
+    image: ms-security-api:dev
     environment:
       - ASPNETCORE_URLS=http://+:5073
     networks:
@@ -12,9 +12,9 @@ services:
 
   currency-market-api:
     build:
-      context: .
-      dockerfile: "MS.Security.Net9.CurrencyMarketAPI/Dockerfile"
-    image: ms-currency-market-api:1.0.0
+      context: ./MS.Security.Net9.CurrencyMarketAPI
+      dockerfile: ./Dockerfile
+    image: ms-currency-market-api:dev
     environment:
       - ASPNETCORE_URLS=http://+:5054
     networks:
@@ -23,9 +23,9 @@ services:
 
   weather-forecast-api:
     build:
-      context: .
-      dockerfile: "MS.Security.Net9.WeatherForecastAPI/Dockerfile"
-    image: ms-weather-forecast-api:1.0.0
+      context: ./MS.Security.Net9.WeatherForecastAPI
+      dockerfile: ./Dockerfile
+    image: ms-weather-forecast-api:dev
     environment:
       - ASPNETCORE_URLS=http://+:5194
     networks:
@@ -34,32 +34,36 @@ services:
 
   gateway-api:
     build:
-      context: .
-      dockerfile: "MS.Security.Net9.APIGateway/Dockerfile"
-    image: ms-gateway-api:1.0.0
+      context: ./MS.Security.Net9.APIGateway
+      dockerfile: Dockerfile
+    image: ms-gateway-api:dev
     environment:
-      - ASPNETCORE_URLS=http://localhost:5270
+      - ASPNETCORE_URLS=http://+:5270
     ports:
       - "5270:5270"
     networks:
       - internal
+      - public
     container_name: gateway-api
-    depends_on:
-      - weather-forecast-api
-      - currency-market-api
-      - security-api
 
   react-front:
     build: 
-      context: .
-      dockerfile: MS.Security.React.Front/Dockerfile
-    image: ms-security-front:1.0.0
+      context: ./MS.Security.React.Front
+      dockerfile: Dockerfile
+    image: ms-security-front:dev
     ports:
       - "5173:5173"
+    networks:
+      - public
     depends_on:
       - gateway-api
+      - weather-forecast-api
+      - currency-market-api
+      - security-api
     container_name: react-front
 
 networks:
   internal:
+    driver: bridge
+  public:
     driver: bridge

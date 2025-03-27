@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/chart"
 
 import { useEffect, useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 interface IData {
     latitude: number
@@ -39,7 +40,9 @@ interface Hourly {
 }
 
 const TemperatureChar = () => {
-    const [data, setData] = useState({} as IData);
+    const [data, setData] = useState<IData|null>(null);
+    const [maxTemperature, setMaxTemperature] = useState<string>("");
+    const [minTemperature, setMinTemperature] = useState<string>("");
 
     type WeatherRawData = {
         hourly: {
@@ -66,7 +69,11 @@ const TemperatureChar = () => {
         return `${year}-${month}-${day} ${hours}:${minutes}`;
     }
 
-    function transformHourlyWeather(data: WeatherRawData): WeatherFormatted[] {
+    function transformHourlyWeather(data: WeatherRawData|null): WeatherFormatted[] {
+        if(data == null)
+        {
+            return [] as WeatherFormatted[];
+        }
         const { time, temperature_2m } = data.hourly;
         const result: WeatherFormatted[] = [];
 
@@ -111,15 +118,25 @@ const TemperatureChar = () => {
             });
     }, [])
 
+    useEffect(() => {
+        if(chartData?.length == 0){
+            return;
+        }
+
+        setMinTemperature(chartData.reduce((min, current) => current.temperature < min.temperature ? current : min).temperature.toString());
+        setMaxTemperature(chartData.reduce((max, current) => current.temperature > max.temperature ? current : max).temperature.toString());
+    }, [chartData])
+
     const [activeChart, setActiveChart] =
-        React.useState<keyof typeof chartConfig>("temperature")
-    const refTemperature = React.useMemo(
+        React.useState<keyof typeof chartConfig>("temperature");
+    /* const refTemperature = React.useMemo(
         () => ({
             max: chartData.reduce((max, current) => current.temperature > max.temperature ? current : max).temperature,
             min: chartData.reduce((min, current) => current.temperature < min.temperature ? current : min).temperature
         }),
         []
-    )
+    ) */
+    /* return <>temperature</> */
     return (
         <Card>
             <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
@@ -140,7 +157,7 @@ const TemperatureChar = () => {
                             Min °C
                         </span>
                         <span className="text-lg font-bold leading-none sm:text-3xl">
-                            {[refTemperature.min].toString()}
+                            {minTemperature}
                         </span>
                     </button>
                     <button
@@ -153,7 +170,7 @@ const TemperatureChar = () => {
                             Max °C
                         </span>
                         <span className="text-lg font-bold leading-none sm:text-3xl">
-                            {[refTemperature.max].toString()}
+                            {maxTemperature}
                         </span>
                     </button>
                 </div>

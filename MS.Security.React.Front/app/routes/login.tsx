@@ -32,7 +32,6 @@ export default function LoginPage() {
     }
 
     const data = await res.json();
-    console.log("access_token --> ", data.accessToken);
     sessionStorage.setItem("token", data.accessToken);
   });
 
