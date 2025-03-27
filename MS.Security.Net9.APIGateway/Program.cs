@@ -2,6 +2,7 @@ namespace MS.Security.Net9.APIGateway;
 
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using MS.Security.Net9.APIGateway.Handlers;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -37,10 +38,22 @@ public static class Program
 
         builder.Services.AddAuthorization();
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", policy =>
+            {
+                policy.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
+        
+        builder.Services.AddTransient<LoggingDelegatingHandler>();
         builder.Services.AddOcelot(configuration);
 
         var app = builder.Build();
 
+        app.UseCors("AllowAll");
         app.UseAuthentication();
         app.UseAuthorization();
 

@@ -5,21 +5,22 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "security-api",
           "Port": 5073
         }
       ],
       "UpstreamPathTemplate": "/api/security/auth/token",
       "UpstreamHttpMethod": [
         "POST"
-      ]
+      ],
+      "DelegatingHandlers": [ "LoggingDelegatingHandler" ]
     },
     {
       "DownstreamPathTemplate": "/api/weather-forecast",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "weather-forecast-api",
           "Port": 5194
         }
       ],
@@ -27,6 +28,7 @@
       "UpstreamHttpMethod": [
         "GET"
       ],
+      "DelegatingHandlers": [ "LoggingDelegatingHandler" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -37,7 +39,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "currency-market-api",
           "Port": 5054
         }
       ],
@@ -45,6 +47,7 @@
       "UpstreamHttpMethod": [
         "GET"
       ],
+      "DelegatingHandlers": [ "LoggingDelegatingHandler" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -52,6 +55,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5000"
+    "BaseUrl": "http://localhost:5270"
   }
 }

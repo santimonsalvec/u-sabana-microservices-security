@@ -18,6 +18,17 @@ public class Program
         );
 
         builder.Services.AddScoped<ICurrencyMarketClient, CurrencyMarketClient>();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", policy =>
+            {
+                policy.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
+
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
@@ -30,12 +41,10 @@ public class Program
             app.MapOpenApi();
         }
 
+        app.UseCors("AllowAll");
         app.UseHttpsRedirection();
-
         app.UseAuthorization();
-
         app.MapControllers();
-
         app.Run();
 
     }
